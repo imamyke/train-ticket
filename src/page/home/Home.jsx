@@ -27,6 +27,7 @@ const Home = () => {
     isLoadingCityData,
     highSpeed,
     departDate,
+    showDateSelector
   } = useSelector(state => state)
   const journeyCbs = useMemo(() => {
     return bindActionCreators({
@@ -41,6 +42,14 @@ const Home = () => {
       onSelect: setSelectedCity
     }, dispatch)
   }, [])
+  const departDateCbs = useMemo(() => {
+    return bindActionCreators({ 
+      onClick: showDateSelector,
+    }, dispatch)
+  }, [])
+  const highSpeedCbs = () => {
+
+  }
   return (
     <div>
       <div className="header-wrapper">
@@ -52,9 +61,15 @@ const Home = () => {
           to={to} 
           {...journeyCbs}
         />
-        {/* <DepartDate time={departDate} {...departDateCbs} />
-        <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
-        <Submit /> */}
+        <DepartDate 
+          time={departDate} 
+          {...departDateCbs} 
+        />
+        <HighSpeed 
+          highSpeed={highSpeed} 
+          // {...highSpeedCbs} 
+        />
+        <Submit />
       </form>
       <CitySelector
         show={isCitySelectorVisible}
