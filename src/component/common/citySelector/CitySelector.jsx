@@ -1,4 +1,5 @@
 import '../citySelector/CitySelector.css'
+import axios from 'axios'
 import classnames from 'classnames'
 import { useCallback, useMemo, useState, useEffect, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -71,14 +72,48 @@ const CityList = memo(({ sections, onSelect, toAlpha }) => {
   );
 })
 
-const SuggestItem = ({ name, onClick }) => {
+const SuggestItem = memo(({ name, onClick }) => {
   return (
     <li className="city-suggest-li" onClick={() => onClick(name)}>
       {name}
     </li>
   );
-}
+})
 
+const Suggest = memo(function Suggest({ keyword, onSelect }) {
+  const [result, setResult] = useState([]);
+
+  useEffect(() => {
+    axios.get('/rest/search?key=' + encodeURIComponent(keyword))
+      .then(res => {
+        const { result, searchKey: sKey } = res.data;
+        sKey === keyword && setResult(result)
+      });
+  }, [keyword]);
+
+  const fallBackResult = useMemo(() => {
+    if (!result.length) {
+      return [{ display: keyword }];
+    }
+    return result;
+  }, [result, keyword]);
+
+  return (
+    <div className="city-suggest">
+      <ul className="city-suggest-ul">
+        {fallBackResult.map(item => {
+          return (
+            <SuggestItem
+              key={item.display}
+              name={item.display}
+              onClick={onSelect}
+            />
+          );
+        })}
+      </ul>
+    </div>
+  );
+});
 
 
 const outputCitySections = (isLoading, cityData, onSelect, toAlpha) => {
@@ -146,9 +181,9 @@ const CitySelector = ({
           &#xf063;
         </i>
       </div>
-      {/* {Boolean(key) && (
-        <Suggest searchKey={key} onSelect={key => onSelect(key)} />
-      )} */}
+      {Boolean(keyword) && (
+        <Suggest keyword={keyword} onSelect={key => onSelect(key)} />
+      )}
       {outputCitySections(isLoading, cityData, onSelect, toAlpha )}
     </div>
   )
