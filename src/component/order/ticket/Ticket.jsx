@@ -1,4 +1,4 @@
-import './Ticket.css'
+import React from 'react'
 
 const Ticket = () => {
   return (

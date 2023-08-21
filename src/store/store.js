@@ -1,11 +1,11 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import reducers from './reducers/index' 
+import { reducersCombination } from './reducers/index' 
+import { statesCombination } from './states' 
 
-const initialState = {
-  
-}
 
+const reducers = { ...reducersCombination }
+const initialState = { ...statesCombination }
 const store = createStore(
   combineReducers(reducers), 
   initialState, 
