@@ -1,4 +1,4 @@
-import React from 'react'
+import '../query/Query.css'
 
 const Query = () => {
   return (

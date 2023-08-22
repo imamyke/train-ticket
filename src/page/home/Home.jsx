@@ -14,7 +14,8 @@ import {
   setSelectedCity,
   showDateSelector,
   hideDateSelector,
-  setDepartDate
+  setDepartDate,
+  toggleHighSpeed
 } from '../../store/actions/homeActions'
 
 
@@ -55,9 +56,11 @@ const Home = () => {
       onBack: hideDateSelector
     }, dispatch)
   }, [])
-  const highSpeedCbs = () => {
-
-  }
+  const highSpeedCbs = useMemo(() => {
+    return bindActionCreators({ 
+      toggle: toggleHighSpeed
+    }, dispatch)
+  }, [])
   const onSelectDate = useCallback((day) => {
     if (!day || day < h0()) return
     dispatch(setDepartDate(day)) 
@@ -68,7 +71,7 @@ const Home = () => {
       <div className="header-wrapper">
         <Header title="火车票" onBack={onBack}  />
       </div>
-      <form action="./query.html" className="form">
+      <form className="form">
         <Journey 
           from={from} 
           to={to} 
@@ -80,7 +83,7 @@ const Home = () => {
         />
         <HighSpeed 
           highSpeed={highSpeed} 
-          // {...highSpeedCbs} 
+          {...highSpeedCbs} 
         />
         <Submit />
       </form>
