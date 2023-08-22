@@ -1,16 +1,20 @@
 import './Home.css'
-import { useCallback, useMemo, memo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { bindActionCreators } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { h0 } from '../../component/common/utils/fp'
 import { DepartDate, HighSpeed, Journey, Submit } from '../../component/home/index'
-import { Header, CitySelector } from '../../component/common/index'
+import { Header, CitySelector, DateSelector } from '../../component/common/index'
 import {
   showCitySelector,
   exchangeFromTo,
   hideCitySelector,
   getCityData,
-  setSelectedCity
+  setSelectedCity,
+  showDateSelector,
+  hideDateSelector,
+  setDepartDate
 } from '../../store/actions/homeActions'
 
 
@@ -27,7 +31,6 @@ const Home = () => {
     isLoadingCityData,
     highSpeed,
     departDate,
-    showDateSelector
   } = useSelector(state => state)
   const journeyCbs = useMemo(() => {
     return bindActionCreators({
@@ -44,12 +47,22 @@ const Home = () => {
   }, [])
   const departDateCbs = useMemo(() => {
     return bindActionCreators({ 
-      onClick: showDateSelector,
+      onClick: showDateSelector
+    }, dispatch)
+  }, [])
+  const dateSelectorCbs = useMemo(() => {
+    return bindActionCreators({ 
+      onBack: hideDateSelector
     }, dispatch)
   }, [])
   const highSpeedCbs = () => {
 
   }
+  const onSelectDate = useCallback((day) => {
+    if (!day || day < h0()) return
+    dispatch(setDepartDate(day)) 
+    dispatch(hideDateSelector())
+  }, [])
   return (
     <div>
       <div className="header-wrapper">
@@ -77,11 +90,11 @@ const Home = () => {
         isLoading={isLoadingCityData}
         {...citySelectorCbs}
       />
-      {/* <DateSelector
-          show={isDateSelectorVisible}
-          {...dateSelectorCbs}
-          onSelect={onSelectDate}
-      /> */}
+      <DateSelector
+        show={isDateSelectorVisible}
+        onSelect={onSelectDate}
+        {...dateSelectorCbs}
+      />
     </div>
   )
 }

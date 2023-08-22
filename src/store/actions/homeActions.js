@@ -8,6 +8,7 @@ import {
   ACTION_SET_IS_LOADING_CITY_DATA,
   ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
   ACTION_SET_HIGH_SPEED,
+  ACTION_SET_DEPART_DATE
 } from '../types/homeTypes';
 
 export const setFrom = (from) => {
@@ -99,6 +100,13 @@ export const exchangeFromTo = () => {
     const { from, to } = getState()
     dispatch(setFrom(to))
     dispatch(setTo(from))
+  }
+}
+
+export const setDepartDate = (departDate) => {
+  return {
+    type: ACTION_SET_DEPART_DATE,
+    payload: departDate
   }
 }
 

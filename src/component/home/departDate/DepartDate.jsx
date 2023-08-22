@@ -18,7 +18,10 @@ const DepartDate = ({ time, onClick }) => {
   (isToday ? '(今天)' : '');
 
   return (
-    <div className="depart-date" onClick={onClick}>
+    <div 
+      className="depart-date" 
+      onClick={onClick}
+    >
       <input 
         type="hidden" 
         name="date" 
