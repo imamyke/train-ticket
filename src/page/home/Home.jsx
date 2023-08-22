@@ -21,7 +21,6 @@ import {
 
 const Home = () => {
   const navigate = useNavigate()
-  const onBack = useCallback(() => navigate(-1), [])
   const dispatch = useDispatch()
   const {
     from, 
@@ -33,6 +32,7 @@ const Home = () => {
     highSpeed,
     departDate,
   } = useSelector(state => state)
+  const onBack = useCallback(() => navigate(-1), [])
   const journeyCbs = useMemo(() => {
     return bindActionCreators({
       exchangeFromTo,
@@ -85,7 +85,7 @@ const Home = () => {
           highSpeed={highSpeed} 
           {...highSpeedCbs} 
         />
-        <Submit />
+        <Submit from={from} to={to} time={departDate} highSpeed={highSpeed} />
       </form>
       <CitySelector
         show={isCitySelectorVisible}

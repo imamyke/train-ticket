@@ -28,13 +28,13 @@ import { ORDER_DURATION, ORDER_DEPART } from '../../page/query/constant';
 import { h0 } from '../../component/common/utils/fp';
 import { setDepartDate } from '../actions/homeActions'
 
-export function setTrainList(trainList) {
+export const setTrainList = (trainList) => {
   return {
     type: ACTION_SET_TRAIN_LIST,
     payload: trainList,
   };
 }
-export function toggleOrderType() {
+export const toggleOrderType = () => {
   return (dispatch, getState) => {
     const { orderType } = getState();
     if (orderType === ORDER_DEPART) {
@@ -50,7 +50,7 @@ export function toggleOrderType() {
     }
   };
 }
-export function toggleOnlyTickets() {
+export const toggleOnlyTickets = () => {
   return (dispatch, getState) => {
     const { onlyTickets } = getState();
 
@@ -60,79 +60,79 @@ export function toggleOnlyTickets() {
     });
   };
 }
-export function setTicketTypes(ticketTypes) {
+export const setTicketTypes = (ticketTypes) => {
   return {
     type: ACTION_SET_TICKET_TYPES,
     payload: ticketTypes,
   };
 }
-export function setCheckedTicketTypes(checkedTicketTypes) {
+export const setCheckedTicketTypes = (checkedTicketTypes) => {
   return {
     type: ACTION_SET_CHECKED_TICKET_TYPES,
     payload: checkedTicketTypes,
   };
 }
-export function setTrainTypes(trainTypes) {
+export const setTrainTypes = (trainTypes) => {
   return {
     type: ACTION_SET_TRAIN_TYPES,
     payload: trainTypes,
   };
 }
-export function setCheckedTrainTypes(checkedTrainTypes) {
+export const setCheckedTrainTypes = (checkedTrainTypes) => {
   return {
     type: ACTION_SET_CHECKED_TRAIN_TYPES,
     payload: checkedTrainTypes,
   };
 }
-export function setDepartStations(departStations) {
+export const setDepartStations = (departStations) => {
   return {
     type: ACTION_SET_DEPART_STATIONS,
     payload: departStations,
   };
 }
-export function setCheckedDepartStations(checkedDepartStations) {
+export const setCheckedDepartStations = (checkedDepartStations) => {
   return {
     type: ACTION_SET_CHECKED_DEPART_STATIONS,
     payload: checkedDepartStations,
   };
 }
-export function setArriveStations(arriveStations) {
+export const setArriveStations = (arriveStations) => {
   return {
     type: ACTION_SET_ARRIVE_STATIONS,
     payload: arriveStations,
   };
 }
-export function setCheckedArriveStations(checkedArriveStations) {
+export const setCheckedArriveStations = (checkedArriveStations) => {
   return {
     type: ACTION_SET_CHECKED_ARRIVE_STATIONS,
     payload: checkedArriveStations,
   };
 }
-export function setDepartTimeStart(departTimeStart) {
+export const setDepartTimeStart = (departTimeStart) => {
   return {
     type: ACTION_SET_DEPART_TIME_START,
     payload: departTimeStart,
   };
 }
-export function setDepartTimeEnd(departTimeEnd) {
+export const setDepartTimeEnd = (departTimeEnd) => {
   return {
     type: ACTION_SET_DEPART_TIME_END,
     payload: departTimeEnd,
   };
 }
-export function setArriveTimeStart(arriveTimeStart) {
+export const setArriveTimeStart = (arriveTimeStart) => {
   return {
     type: ACTION_SET_ARRIVE_TIME_START,
     payload: arriveTimeStart,
   };
 }
-export function setArriveTimeEnd(arriveTimeEnd) {
+export const setArriveTimeEnd = (arriveTimeEnd) => {
   return {
     type: ACTION_SET_ARRIVE_TIME_END,
     payload: arriveTimeEnd,
   };
 }
-export function toggleIsFiltersVisible() {
+export const toggleIsFiltersVisible = () => {
   return (dispatch, getState) => {
     const { isFiltersVisible } = getState();
 
@@ -142,20 +142,20 @@ export function toggleIsFiltersVisible() {
     });
   };
 }
-export function setSearchParsed(searchParsed) {
+export const setSearchParsed = (searchParsed) => {
   return {
     type: ACTION_SET_SEARCH_PARSED,
     payload: searchParsed,
   };
 }
 
-export function nextDate() {
+export const nextDate = () => {
   return (dispatch, getState) => {
     const { departDate } = getState();
     dispatch(setDepartDate(h0(departDate) + 86400 * 1000));
   };
 }
-export function prevDate() {
+export const prevDate = () => {
   return (dispatch, getState) => {
     const { departDate } = getState();
     dispatch(setDepartDate(h0(departDate) - 86400 * 1000));
