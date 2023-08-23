@@ -28,6 +28,7 @@ const dataController = {
   },
   getQuery: (req, res) => { // GET
     const response = query
+    const onlyTickets = req.query.onlyTickets // 篩選有票
     response.dataMap.directTrainInfo.trains = response.dataMap.directTrainInfo.trains.reverse();
     return res.json(response);
   },

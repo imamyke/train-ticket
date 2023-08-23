@@ -32,40 +32,40 @@ const Home = () => {
     highSpeed,
     departDate,
   } = useSelector(state => state)
-  const onBack = useCallback(() => navigate(-1), [])
+  const onBack = useCallback(() => navigate(-1), [navigate])
   const journeyCbs = useMemo(() => {
     return bindActionCreators({
       exchangeFromTo,
       showCitySelector
     }, dispatch)
-  }, [])
+  }, [dispatch])
   const citySelectorCbs = useMemo(() => {
     return bindActionCreators({ 
       onBack: hideCitySelector,
       getCityData,
       onSelect: setSelectedCity
     }, dispatch)
-  }, [])
+  }, [dispatch])
   const departDateCbs = useMemo(() => {
     return bindActionCreators({ 
       onClick: showDateSelector
     }, dispatch)
-  }, [])
+  }, [dispatch])
   const dateSelectorCbs = useMemo(() => {
     return bindActionCreators({ 
       onBack: hideDateSelector
     }, dispatch)
-  }, [])
+  }, [dispatch])
   const highSpeedCbs = useMemo(() => {
     return bindActionCreators({ 
       toggle: toggleHighSpeed
     }, dispatch)
-  }, [])
+  }, [dispatch])
   const onSelectDate = useCallback((day) => {
     if (!day || day < h0()) return
     dispatch(setDepartDate(day)) 
     dispatch(hideDateSelector())
-  }, [])
+  }, [dispatch])
   return (
     <div>
       <div className="header-wrapper">

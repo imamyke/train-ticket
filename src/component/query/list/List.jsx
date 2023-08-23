@@ -1,9 +1,15 @@
 import '../list/List.css'
+import URI from 'urijs';
 import { memo, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
-const List = () => {
+const List = ({ list }) => {
   return (
-    <div>List</div>
+    <ul className="list">
+      {list.map(item => (
+        <ListItem {...item} key={item.trainNumber} />
+      ))}
+    </ul>
   )
 }
 
@@ -18,9 +24,18 @@ const ListItem = ({
   priceMsg,
   dayAfter,
 }) => {
+  const url = useMemo(() => {
+    return new URI('/ticket')
+      .setSearch('aStation', aStation)
+      .setSearch('dStation', dStation)
+      .setSearch('trainNumber', trainNumber)
+      .setSearch('date', date)
+      .toString();
+  }, [aStation, dStation, trainNumber, date]);
+  
   return (
     <li className="list-item">
-      {/* <a href={url}>
+      <Link to={url}>
         <span className="item-time">
           <em>{dTime}</em>
           <br />
@@ -49,9 +64,9 @@ const ListItem = ({
           <br />
           <em className="em-light-orange">可抢票</em>
         </span>
-      </a> */}
+      </Link>
     </li>
   );
 }
 
-export default List
+export default memo(List)

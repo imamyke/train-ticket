@@ -1,11 +1,4 @@
 import {
-  ACTION_SET_FROM,
-  ACTION_SET_TO,
-  ACTION_SET_DEPART_DATE,
-  ACTION_SET_HIGH_SPEED,
-} from '../types/homeTypes'
-
-import {
   ACTION_SET_TRAIN_LIST,
   ACTION_SET_ORDER_TYPE,
   ACTION_SET_ONLY_TICKETS,
@@ -22,7 +15,7 @@ import {
   ACTION_SET_ARRIVE_TIME_START,
   ACTION_SET_ARRIVE_TIME_END,
   ACTION_SET_IS_FILTERS_VISIBLE,
-  ACTION_SET_SEARCH_PARSED,
+  ACTION_SET_SEARCH_PARSED
 } from '../types/queryTypes';
 import { ORDER_DURATION, ORDER_DEPART } from '../../page/query/constant';
 import { h0 } from '../../component/common/utils/fp';
@@ -161,3 +154,4 @@ export const prevDate = () => {
     dispatch(setDepartDate(h0(departDate) - 86400 * 1000));
   };
 }
+

@@ -1,9 +1,16 @@
-import React from 'react'
+import { memo } from 'react'
+import '../ticket/Ticket.css'
 
-const Ticket = () => {
+const Ticket = ({ price, type }) => {
   return (
-    <div>Ticket</div>
+    <div className="ticket">
+      <p>
+        <span className="ticket-type">{type}</span>
+        <span className="ticket-price">{price}</span>
+      </p>
+      <div className="label">坐席</div>
+    </div>
   )
 }
 
-export default Ticket
+export default memo(Ticket)

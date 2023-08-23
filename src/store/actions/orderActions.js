@@ -2,38 +2,20 @@ import axios from 'axios';
 import { ACTION_SET_DEPART_DATE } from '../types/homeTypes';
 import { ACTION_SET_SEARCH_PARSED } from '../types/queryTypes'
 import { 
-  ACTION_SET_TRAIN_NUMBER,
-  ACTION_SET_DEPART_STATION, 
-  ACTION_SET_ARRIVE_STATION,
   ACTION_SET_SEAT_TYPE,
-  ACTION_SET_ARRIVE_DATE,
-  ACTION_SET_DEPART_TIME_STR,
-  ACTION_SET_ARRIVE_TIME_STR,
-  ACTION_SET_DURATION_STR,
   ACTION_SET_PRICE,
   ACTION_SET_PASSENGERS,
   ACTION_SET_MENU,
   ACTION_SET_IS_MENU_VISIBLE
 } from '../types/orderTypes'
 
-export function setTrainNumber(trainNumber) {
-  return {
-    type: ACTION_SET_TRAIN_NUMBER,
-    payload: trainNumber,
-  };
-}
-export function setDepartStation(departStation) {
-  return {
-    type: ACTION_SET_DEPART_STATION,
-    payload: departStation,
-  };
-}
-export function setArriveStation(arriveStation) {
-  return {
-    type: ACTION_SET_ARRIVE_STATION,
-    payload: arriveStation,
-  };
-}
+import {
+  setDepartTimeStr,
+  setArriveTimeStr,
+  setArriveDate,
+  setDurationStr
+} from '../actions/ticketActions'
+
 export function setSeatType(seatType) {
   return {
     type: ACTION_SET_SEAT_TYPE,
@@ -45,34 +27,6 @@ export function setDepartDate(departDate) {
   return {
     type: ACTION_SET_DEPART_DATE,
     payload: departDate,
-  };
-}
-
-export function setArriveDate(arriveDate) {
-  return {
-    type: ACTION_SET_ARRIVE_DATE,
-    payload: arriveDate,
-  };
-}
-
-export function setDepartTimeStr(departTimeStr) {
-  return {
-    type: ACTION_SET_DEPART_TIME_STR,
-    payload: departTimeStr,
-  };
-}
-
-export function setArriveTimeStr(arriveTimeStr) {
-  return {
-    type: ACTION_SET_ARRIVE_TIME_STR,
-    payload: arriveTimeStr,
-  };
-}
-
-export function setDurationStr(durationStr) {
-  return {
-    type: ACTION_SET_DURATION_STR,
-    payload: durationStr,
   };
 }
 
@@ -114,14 +68,15 @@ export function setSearchParsed(searchParsed) {
 export function fetchInitial(url) {
   return (dispatch, getState) => {
     axios.get(url)
-      .then(data => {
+      .then(res => {
         const {
           departTimeStr,
           arriveTimeStr,
           arriveDate,
           durationStr,
           price,
-        } = data;
+        } = res.data;
+        console.log(departTimeStr)
         dispatch(setDepartTimeStr(departTimeStr));
         dispatch(setArriveTimeStr(arriveTimeStr));
         dispatch(setArriveDate(arriveDate));
@@ -133,7 +88,7 @@ export function fetchInitial(url) {
 
 let passengerIdSeed = 0;
 
-export function createAdult() {
+export const createAdult = () => {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -161,7 +116,7 @@ export function createAdult() {
   };
 }
 
-export function createChild() {
+export const createChild = () => {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -202,19 +157,17 @@ export function createChild() {
   };
 }
 
-export function removePassenger(id) {
+export const removePassenger = (id) => {
   return (dispatch, getState) => {
     const { passengers } = getState();
-
     const newPassengers = passengers.filter(passenger => {
       return passenger.id !== id && passenger.followAdult !== id;
     });
-
     dispatch(setPassengers(newPassengers));
   };
 }
 
-export function updatePassenger(id, data, keysToBeRemoved = []) {
+export const updatePassenger = (id, data, keysToBeRemoved = []) => {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -235,14 +188,14 @@ export function updatePassenger(id, data, keysToBeRemoved = []) {
   };
 }
 
-export function showMenu(menu) {
+export const showMenu = (menu) => {
   return dispatch => {
     dispatch(setMenu(menu));
     dispatch(setIsMenuVisible(true));
   };
 }
 
-export function showGenderMenu(id) {
+export const showGenderMenu = (id) => {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -275,7 +228,7 @@ export function showGenderMenu(id) {
   };
 }
 
-export function showFollowAdultMenu(id) {
+export const showFollowAdultMenu = (id) => {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -305,7 +258,7 @@ export function showFollowAdultMenu(id) {
   };
 }
 
-export function showTicketTypeMenu(id) {
+export const showTicketTypeMenu = (id) => {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -323,34 +276,32 @@ export function showTicketTypeMenu(id) {
               updatePassenger(
                 id,
                 {
-                    ticketType,
-                    licenceNo: '',
+                  ticketType,
+                  licenceNo: '',
                 },
                 ['gender', 'followAdult', 'birthday']
               )
             );
           } else {
-            const adult = passengers.find(
-                passenger =>
-                    passenger.id === id &&
-                    passenger.ticketType === 'adult'
+            const adult = passengers.find(passenger =>
+              passenger.id === id && passenger.ticketType === 'adult'
             );
 
               if (adult) {
                 dispatch(
-                    updatePassenger(
-                        id,
-                        {
-                            ticketType,
-                            gender: '',
-                            followAdult: adult.id,
-                            birthday: '',
-                        },
-                        ['licenceNo']
-                    )
+                  updatePassenger(
+                    id,
+                    {
+                      ticketType,
+                      gender: '',
+                      followAdult: adult.id,
+                      birthday: '',
+                    },
+                    ['licenceNo']
+                  )
                 );
               } else {
-                  alert('没有其他成人乘客');
+                alert('没有其他成人乘客');
               }
           }
 
@@ -373,6 +324,6 @@ export function showTicketTypeMenu(id) {
   };
 }
 
-export function hideMenu() {
+export const hideMenu = () => {
   return setIsMenuVisible(false);
 }

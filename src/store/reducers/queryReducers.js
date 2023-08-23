@@ -1,7 +1,4 @@
 import {
-  ACTION_SET_FROM,
-  ACTION_SET_TO,
-  ACTION_SET_DEPART_DATE,
   ACTION_SET_HIGH_SPEED,
 } from '../types/homeTypes'
 
@@ -26,9 +23,8 @@ import {
 } from '../types/queryTypes';
 import { ORDER_DEPART } from '../../page/query/constant';
 
-
 export const queryReducers = {
-  trainList(state = [], action) {
+  trainList: (state = [], action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_TRAIN_LIST:
@@ -38,7 +34,7 @@ export const queryReducers = {
 
     return state;
 },
-  orderType(state = ORDER_DEPART, action) {
+  orderType: (state = ORDER_DEPART, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_ORDER_TYPE:
@@ -48,7 +44,7 @@ export const queryReducers = {
 
     return state;
   },
-  onlyTickets(state = false, action) {
+  onlyTickets: (state = false, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_ONLY_TICKETS:
@@ -58,7 +54,7 @@ export const queryReducers = {
 
     return state;
   },
-  ticketTypes(state = [], action) {
+  ticketTypes: (state = [], action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_TICKET_TYPES:
@@ -68,7 +64,7 @@ export const queryReducers = {
 
     return state;
   },
-  checkedTicketTypes(state = {}, action) {
+  checkedTicketTypes: (state = {}, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_CHECKED_TICKET_TYPES:
@@ -78,7 +74,7 @@ export const queryReducers = {
 
     return state;
   },
-  trainTypes(state = [], action) {
+  trainTypes: (state = [], action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_TRAIN_TYPES:
@@ -88,7 +84,7 @@ export const queryReducers = {
 
     return state;
   },
-  checkedTrainTypes(state = {}, action) {
+  checkedTrainTypes: (state = {}, action) => {
     const { type, payload } = action;
 
     let highSpeed;
@@ -115,7 +111,7 @@ export const queryReducers = {
 
     return state;
   },
-  departStations(state = [], action) {
+  departStations: (state = [], action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_DEPART_STATIONS:
@@ -125,7 +121,7 @@ export const queryReducers = {
 
     return state;
   },
-  checkedDepartStations(state = {}, action) {
+  checkedDepartStations: (state = {}, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_CHECKED_DEPART_STATIONS:
@@ -135,7 +131,7 @@ export const queryReducers = {
 
     return state;
   },
-  arriveStations(state = [], action) {
+  arriveStations: (state = [], action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_ARRIVE_STATIONS:
@@ -145,7 +141,7 @@ export const queryReducers = {
 
     return state;
   },
-  checkedArriveStations(state = {}, action) {
+  checkedArriveStations: (state = {}, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_CHECKED_ARRIVE_STATIONS:
@@ -155,7 +151,7 @@ export const queryReducers = {
 
     return state;
   },
-  departTimeStart(state = 0, action) {
+  departTimeStart: (state = 0, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_DEPART_TIME_START:
@@ -165,7 +161,7 @@ export const queryReducers = {
 
     return state;
   },
-  departTimeEnd(state = 24, action) {
+  departTimeEnd: (state = 24, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_DEPART_TIME_END:
@@ -175,7 +171,7 @@ export const queryReducers = {
 
     return state;
   },
-  arriveTimeStart(state = 0, action) {
+  arriveTimeStart: (state = 0, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_ARRIVE_TIME_START:
@@ -185,7 +181,7 @@ export const queryReducers = {
 
     return state;
   },
-  arriveTimeEnd(state = 24, action) {
+  arriveTimeEnd: (state = 24, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_ARRIVE_TIME_END:
@@ -195,7 +191,7 @@ export const queryReducers = {
 
     return state;
   },
-  isFiltersVisible(state = false, action) {
+  isFiltersVisible: (state = false, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_IS_FILTERS_VISIBLE:
@@ -205,7 +201,7 @@ export const queryReducers = {
 
     return state;
   },
-  searchParsed(state = false, action) {
+  searchParsed: (state = false, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_SEARCH_PARSED:
@@ -214,5 +210,5 @@ export const queryReducers = {
     }
 
     return state;
-  },
+  }
 }

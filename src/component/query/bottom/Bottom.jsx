@@ -1,9 +1,17 @@
 import '../bottom/Bottom.css'
-import { memo, useState, useMemo, useReducer } from 'react';
 import classnames from 'classnames';
-import Slider from '../slider/Slider';
+import BottomModal from './BottomModal';
+import { ORDER_DEPART } from '../../../page/query/constant';
 
 const bottom = ({
+  toggleOrderType,
+  toggleHighSpeed,
+  toggleOnlyTickets,
+  toggleIsFiltersVisible,
+  highSpeed,
+  orderType,
+  onlyTickets,
+  isFiltersVisible,
   ticketTypes,
   trainTypes,
   departStations,
@@ -24,46 +32,79 @@ const bottom = ({
   setDepartTimeEnd,
   setArriveTimeStart,
   setArriveTimeEnd,
-  toggleIsFiltersVisible,
 }) => {
+  
+  const noChecked = () => {
+    return (
+      Object.keys(checkedTicketTypes).length === 0 &&
+      Object.keys(checkedTrainTypes).length === 0 &&
+      Object.keys(checkedDepartStations).length === 0 &&
+      Object.keys(checkedArriveStations).length === 0 &&
+      departTimeStart === 0 &&
+      departTimeEnd === 24 &&
+      arriveTimeStart === 0 &&
+      arriveTimeEnd === 24
+    );
+  }
   return (
-    <div className="bottom-modal">
-      <div className="bottom-dialog">
-        <div className="bottom-dialog-content">
-          <div className="title">
-            {/* <span
-              className={classnames('reset', {disabled: isResetDisabled})}
-              onClick={reset}
-            >
-              重置
-            </span>
-            <span className="ok" onClick={sure}>
-              确定
-            </span> */}
-          </div>
-          {/* <div className="options">
-            {optionGroup.map(group => (
-              <Option {...group} key={group.title} />
-            ))}
-            <Slider
-              title="出发时间"
-              currentStartHours={localDepartTimeStart}
-              currentEndHours={localDepartTimeEnd}
-              onStartChanged={setLocalDepartTimeStart}
-              onEndChanged={setLocalDepartTimeEnd}
-            />
-            <Slider
-              title="到达时间"
-              currentStartHours={localArriveTimeStart}
-              currentEndHours={localArriveTimeEnd}
-              onStartChanged={setLocalArriveTimeStart}
-              onEndChanged={setLocalArriveTimeEnd}
-            />
-          </div> */}
-        </div>
+    <div className="bottom">
+      <div className="bottom-filters">
+        <span 
+          className="item" 
+          onClick={toggleOrderType}
+        >
+          <i className="icon">&#xf065;</i>
+          {orderType === ORDER_DEPART ? '出发 早→晚' : '耗时 短→长'}
+        </span>
+        <span
+          className={classnames('item', { 'item-on': highSpeed })}
+          onClick={toggleHighSpeed}
+        >
+          <i className="icon">{highSpeed ? '\uf43f' : '\uf43e'}</i>
+          只看高铁动车
+        </span>
+        <span
+          className={classnames('item', { 'item-on': onlyTickets })}
+          onClick={toggleOnlyTickets}
+        >
+          <i className="icon">{onlyTickets ? '\uf43d' : '\uf43c'}</i>
+          只看有票
+        </span>
+        <span
+          className={classnames('item', {'item-on': isFiltersVisible || !noChecked() })}
+          onClick={toggleIsFiltersVisible}
+        >
+          <i className="icon">{noChecked() ? '\uf0f7' : '\uf446'}</i>
+          综合筛选
+        </span>
       </div>
+        {isFiltersVisible && (
+          <BottomModal
+            ticketTypes={ticketTypes}
+            trainTypes={trainTypes}
+            departStations={departStations}
+            arriveStations={arriveStations}
+            checkedTicketTypes={checkedTicketTypes}
+            checkedTrainTypes={checkedTrainTypes}
+            checkedDepartStations={checkedDepartStations}
+            checkedArriveStations={checkedArriveStations}
+            departTimeStart={departTimeStart}
+            departTimeEnd={departTimeEnd}
+            arriveTimeStart={arriveTimeStart}
+            arriveTimeEnd={arriveTimeEnd}
+            setCheckedTicketTypes={setCheckedTicketTypes}
+            setCheckedTrainTypes={setCheckedTrainTypes}
+            setCheckedDepartStations={setCheckedDepartStations}
+            setCheckedArriveStations={setCheckedArriveStations}
+            setDepartTimeStart={setDepartTimeStart}
+            setDepartTimeEnd={setDepartTimeEnd}
+            setArriveTimeStart={setArriveTimeStart}
+            setArriveTimeEnd={setArriveTimeEnd}
+            toggleIsFiltersVisible={toggleIsFiltersVisible}
+          />
+        )}
     </div>
   )
 }
 
-export default memo(bottom)
+export default bottom

@@ -6,7 +6,6 @@ import 'dayjs/locale/zh-cn';
 
 const format = (d) => {
   const date = dayjs(d);
-
   return date.format('MM-DD') + ' ' + date.locale('zh-cn').format('ddd');
 }
 

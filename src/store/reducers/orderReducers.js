@@ -1,12 +1,5 @@
 import { 
-  ACTION_SET_TRAIN_NUMBER,
-  ACTION_SET_DEPART_STATION, 
-  ACTION_SET_ARRIVE_STATION,
   ACTION_SET_SEAT_TYPE,
-  ACTION_SET_ARRIVE_DATE,
-  ACTION_SET_DEPART_TIME_STR,
-  ACTION_SET_ARRIVE_TIME_STR,
-  ACTION_SET_DURATION_STR,
   ACTION_SET_PRICE,
   ACTION_SET_PASSENGERS,
   ACTION_SET_MENU,
@@ -14,37 +7,7 @@ import {
 } from '../types/orderTypes'
 
 export const orderReducers = {
-  trainNumber(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_TRAIN_NUMBER:
-        return payload;
-      default:
-    }
-
-    return state;
-},
-  departStation(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_DEPART_STATION:
-        return payload;
-      default:
-    }
-
-    return state;
-  },
-  arriveStation(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_ARRIVE_STATION:
-        return payload;
-      default:
-    }
-
-    return state;
-  },
-  seatType(state = null, action) {
+  seatType: (state = null, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_SEAT_TYPE:
@@ -54,48 +17,7 @@ export const orderReducers = {
 
     return state;
   },
-
-  arriveDate(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_ARRIVE_DATE:
-        return payload;
-      default:
-    }
-
-    return state;
-  },
-  departTimeStr(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_DEPART_TIME_STR:
-        return payload;
-      default:
-    }
-
-    return state;
-  },
-  arriveTimeStr(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_ARRIVE_TIME_STR:
-        return payload;
-      default:
-    }
-
-    return state;
-  },
-  durationStr(state = null, action) {
-    const { type, payload } = action;
-    switch (type) {
-      case ACTION_SET_DURATION_STR:
-        return payload;
-      default:
-    }
-
-    return state;
-  },
-  price(state = null, action) {
+  price: (state = null, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_PRICE:
@@ -105,7 +27,7 @@ export const orderReducers = {
 
     return state;
   },
-  passengers(state = [], action) {
+  passengers: (state = [], action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_PASSENGERS:
@@ -115,7 +37,7 @@ export const orderReducers = {
 
     return state;
   },
-  menu(state = null, action) {
+  menu: (state = null, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_MENU:
@@ -125,7 +47,7 @@ export const orderReducers = {
 
     return state;
   },
-  isMenuVisible(state = false, action) {
+  isMenuVisible: (state = false, action) => {
     const { type, payload } = action;
     switch (type) {
       case ACTION_SET_IS_MENU_VISIBLE:

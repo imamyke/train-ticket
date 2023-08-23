@@ -9,6 +9,7 @@ import {
   ACTION_SET_HIGH_SPEED,
   ACTION_SET_DEPART_DATE,
 } from '../types/homeTypes';
+import { ACTION_SET_CHECKED_TRAIN_TYPES } from '../types/queryTypes';
 
 export const homeReducers = {
   from: (state = '北京', action) => {
@@ -85,7 +86,10 @@ export const homeReducers = {
     switch (type) {
       case ACTION_SET_HIGH_SPEED:
         return payload;
-      default:
+      // case ACTION_SET_CHECKED_TRAIN_TYPES:
+      //   const checkedTrainTypes = payload
+      //   return checkedTrainTypes[1] && checkedTrainTypes[5]
+      default: 
     }
 
     return state;
