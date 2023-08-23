@@ -8,10 +8,10 @@ const Choose = ({ passengers, updatePassenger }) => {
       <div>
         {passengers.map(passenger => (
           <p
-          key={passenger.id}
-          className={classnames('seat', { active: passenger.seat === seatType })}
-          data-text={seatType}
-          onClick={() => updatePassenger(passenger.id, { seat: seatType })}
+            key={passenger.id}
+            className={classnames('seat', { active: passenger.seat === seatType })}
+            data-text={seatType}
+            onClick={() => updatePassenger(passenger.id, { seat: seatType })}
           >
             &#xe02d;</p>
         ))}

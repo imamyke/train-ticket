@@ -86,9 +86,9 @@ export const homeReducers = {
     switch (type) {
       case ACTION_SET_HIGH_SPEED:
         return payload;
-      // case ACTION_SET_CHECKED_TRAIN_TYPES:
-      //   const checkedTrainTypes = payload
-      //   return checkedTrainTypes[1] && checkedTrainTypes[5]
+      case ACTION_SET_CHECKED_TRAIN_TYPES:
+        const checkedTrainTypes = payload
+        return checkedTrainTypes[1] && checkedTrainTypes[5]
       default: 
     }
 

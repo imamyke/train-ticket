@@ -22,11 +22,11 @@ const Account = ({ price = 0, length }) => {
         <div className={classnames('detail', { hidden: !expanded })}>
             <div className="title">金额详情</div>
             <ul>
-                <li>
-                    <span>火车票</span>
-                    <span>￥{price}</span>
-                    <span>&#xD7;{length}</span>
-                </li>
+              <li>
+                <span>火车票</span>
+                <span>￥{price}</span>
+                <span>&#xD7;{length}</span>
+              </li>
             </ul>
         </div>
       </div>

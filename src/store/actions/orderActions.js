@@ -76,7 +76,6 @@ export function fetchInitial(url) {
           durationStr,
           price,
         } = res.data;
-        console.log(departTimeStr)
         dispatch(setDepartTimeStr(departTimeStr));
         dispatch(setArriveTimeStr(arriveTimeStr));
         dispatch(setArriveDate(arriveDate));
@@ -86,6 +85,7 @@ export function fetchInitial(url) {
   };
 }
 
+// 添加成人
 let passengerIdSeed = 0;
 
 export const createAdult = () => {
@@ -95,9 +95,7 @@ export const createAdult = () => {
     for (let passenger of passengers) {
       const keys = Object.keys(passenger);
       for (let key of keys) {
-        if (!passenger[key]) {
-          return;
-        }
+        if (!passenger[key]) return // 訊息為空 => 不可加入
       }
     }
 
@@ -125,9 +123,7 @@ export const createChild = () => {
     for (let passenger of passengers) {
       const keys = Object.keys(passenger);
       for (let key of keys) {
-        if (!passenger[key]) {
-          return;
-        }
+        if (!passenger[key]) return // 訊息為空 => 不可加入
       }
 
       if (passenger.ticketType === 'adult') {
@@ -175,7 +171,6 @@ export const updatePassenger = (id, data, keysToBeRemoved = []) => {
       if (passengers[i].id === id) {
         const newPassengers = [...passengers];
         newPassengers[i] = Object.assign({}, passengers[i], data);
-
         for (let key of keysToBeRemoved) {
           delete newPassengers[i][key];
         }
@@ -201,9 +196,7 @@ export const showGenderMenu = (id) => {
 
     const passenger = passengers.find(passenger => passenger.id === id);
 
-    if (!passenger) {
-      return;
-    }
+    if (!passenger) return
 
     dispatch(
       showMenu({
@@ -234,9 +227,7 @@ export const showFollowAdultMenu = (id) => {
 
     const passenger = passengers.find(passenger => passenger.id === id);
 
-    if (!passenger) {
-      return;
-    }
+    if (!passenger) return
 
     dispatch(
       showMenu({
@@ -264,9 +255,7 @@ export const showTicketTypeMenu = (id) => {
 
     const passenger = passengers.find(passenger => passenger.id === id);
 
-    if (!passenger) {
-      return;
-    }
+    if (!passenger) return
 
     dispatch(
       showMenu({

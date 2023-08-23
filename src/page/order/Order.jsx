@@ -29,7 +29,6 @@ import {
   showTicketTypeMenu,
 } from '../../store/actions/orderActions'
 
-
 const Order = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -51,7 +50,6 @@ const Order = () => {
     isMenuVisible,
     searchParsed
   } = useSelector(state => state)
-
   // 解析 URI
   useEffect(() => {
     const { trainNumber, dStation, aStation, type, date } = URI.parseQuery(search);

@@ -24,10 +24,12 @@ const Menu = ({ show, options, onPress, hideMenu }) => {
 }
 
 const MenuItem = memo(({ 
-  onPress, 
+  // options
   title, 
   value, 
-  active 
+  active, 
+  // onPress
+  onPress 
 }) => {
   return (
     <li

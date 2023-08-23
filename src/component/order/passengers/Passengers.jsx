@@ -17,7 +17,6 @@ const Passengers = ({
     for (const passenger of passengers) {
       ret[passenger.id] = passenger.name;
     }
-
     return ret;
   }, [passengers]);
   return (
@@ -26,13 +25,15 @@ const Passengers = ({
         {passengers.map(passenger => {
           return (
             <Passenger
+              // passenger info
               {...passenger}
               followAdultName={nameMap[passenger.followAdult]}
-              showTicketTypeMenu={showTicketTypeMenu}
-              showGenderMenu={showGenderMenu}
-              showFollowAdultMenu={showFollowAdultMenu}
+              // 操作
               onRemove={removePassenger}
               onUpdate={updatePassenger}
+              showGenderMenu={showGenderMenu}
+              showFollowAdultMenu={showFollowAdultMenu}
+              showTicketTypeMenu={showTicketTypeMenu}
               key={passenger.id}
             />
           );
@@ -51,13 +52,15 @@ const Passengers = ({
 }
 
 const Passenger = memo(({
+  // passenger
   id,
   name,
-  followAdultName,
   ticketType,
   licenceNo,
   gender,
   birthday,
+  followAdultName,
+  // 操作
   onRemove,
   onUpdate,
   showGenderMenu,
